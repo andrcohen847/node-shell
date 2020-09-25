@@ -1,17 +1,26 @@
+const pwd = require('./pwd')
+const ls = require('./ls')
+const cat = require('./cat')
+
 process.stdout.write('prompt > ');
 
 process.stdin.on('data', (data) => {
-  const cmd = data.toString().trim()
+  const cmd = data.toString().trim().split(' ')
 
-  const printWorkingDirectory = process.cwd()
+  switch(cmd[0]) {
+    case 'pwd':
+      pwd();
+      break;
+    case 'ls':
+      ls();
+      break;
+    case 'cat':
+      cat(cmd[1]);
+      break;
+    default:
+      process.stdout.write('You typed: ' + cmd.join(' ') + ' -- that is not a valid command in my file');
+  }
 
- if (cmd === 'pwd') {
-  process.stdout.write(printWorkingDirectory)
-
- }
-
-  // process.stdout.write('You typed: ' + cmd);
-  process.stdout.write('\nprompt > ');
 
 });
 
