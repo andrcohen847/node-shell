@@ -1,6 +1,7 @@
 const pwd = require('./pwd')
 const ls = require('./ls')
 const cat = require('./cat')
+const curl = require('./curl')
 
 process.stdout.write('prompt > ');
 
@@ -16,6 +17,9 @@ process.stdin.on('data', (data) => {
       break;
     case 'cat':
       cat(cmd[1]);
+      break;
+    case 'curl':
+      curl(cmd[1]);
       break;
     default:
       process.stdout.write('You typed: ' + cmd.join(' ') + ' -- that is not a valid command in my file');
