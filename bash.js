@@ -1,7 +1,13 @@
 const pwd = require('./pwd')
 const ls = require('./ls')
 const cat = require('./cat')
-const curl = require('./curl')
+const curl = require('./curl');
+const date = require('./date');
+
+function done(output) {
+  process.stdout.write(output);
+  process.stdout.write("\nprompt > ");
+}
 
 process.stdout.write('prompt > ');
 
@@ -10,19 +16,22 @@ process.stdin.on('data', (data) => {
 
   switch(cmd[0]) {
     case 'pwd':
-      pwd();
+      pwd(done);
       break;
     case 'ls':
-      ls();
+      ls(done);
       break;
     case 'cat':
-      cat(cmd[1]);
+      cat(cmd[1], done);
       break;
     case 'curl':
-      curl(cmd[1]);
+      curl(cmd[1], done);
+      break;
+    case 'date':
+      date(done);
       break;
     default:
-      process.stdout.write('You typed: ' + cmd.join(' ') + ' -- that is not a valid command in my file');
+      done(`You typed: ${cmd.join(' ')} -- that is not a valid command in my file`)
   }
 
 

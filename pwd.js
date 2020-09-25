@@ -1,5 +1,4 @@
-module.exports = function pwd() {
+module.exports = function pwd(done) {
   const printWorkingDirectory = process.cwd()
-  process.stdout.write(printWorkingDirectory)
-  process.stdout.write('\nprompt > ');
+  done(printWorkingDirectory)
 }

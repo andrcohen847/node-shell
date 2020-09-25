@@ -1,11 +1,10 @@
 const { stdout } = require('process');
 const request = require('request');
 
-module.exports = function(url) {
+module.exports = function(url, done) {
   request(url, (err, response, body) => {
     if (err) throw err;
-    process.stdout.write(body);
-    process.stdout.write("\nprompt > ");
+    done(body);
   })
 }
 
