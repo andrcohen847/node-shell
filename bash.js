@@ -3,6 +3,7 @@ const ls = require('./ls')
 const cat = require('./cat')
 const curl = require('./curl');
 const date = require('./date');
+const head = require('./head')
 
 function done(output) {
   process.stdout.write(output);
@@ -30,6 +31,9 @@ process.stdin.on('data', (data) => {
     case 'date':
       date(done);
       break;
+    case 'head':
+        head(cmd[1], done);
+        break;
     default:
       done(`You typed: ${cmd.join(' ')} -- that is not a valid command in my file`)
   }
